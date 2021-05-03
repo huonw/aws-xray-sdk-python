@@ -1,3 +1,4 @@
+import functools
 import re
 import types
 
@@ -26,6 +27,7 @@ def decorate_all_functions(function_decorator):
 
 
 def xray_on_call(cls, func):
+    @functools.wraps(func)
     def wrapper(*args, **kw):
         from ..query import XRayQuery, XRaySession
         try:
